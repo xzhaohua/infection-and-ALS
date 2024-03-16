@@ -1,0 +1,63 @@
+#additionally adjusted healthy diet
+#eTable 9-11
+c <- healthy.diet[,c(2,59:68)]
+infection <-merge(infection,c,by = "Participant.ID")
+infection$healthy.diet[is.na(infection$healthy.diet)==T] <- 0
+infection$fruit[is.na(infection$fruit)==T] <- 0
+infection$vegetable[is.na(infection$vegetable)==T] <- 0
+infection$Oily.fish[is.na(infection$Oily.fish)==T] <- 0
+infection$red.meat[is.na(infection$red.meat)==T] <- 0
+infection$Processed.meat[is.na(infection$Processed.meat)==T] <- 0
+infection$whole.grains[is.na(infection$whole.grains)==T] <- 0
+infection$refined.grains[is.na(infection$refined.grains)==T] <- 0
+infection$healthy.diet <- ifelse(infection$healthy.diet==1,1,0)
+infection$healthy.score <- infection$fruit+infection$vegetable+infection$Oily.fish+infection$red.meat+infection$Processed.meat+infection$whole.grains+infection$refined.grains
+exposure<- infection[infection$Latency>=0, ]
+
+covariate_columns <- c("IBtwo","IBnum","IBhospitaltwo","IBhospitalnum", "CNStwo","CNSnum","gasttwo",
+                       "gastnum","respirtwo","respirnum","skintwo","skinnum","ureatwo","ureanum","viraltwo",
+                       "viralnum", "bacterialtwo", "bacterialnum")
+subset_data <- exposure
+for (covariate_column in covariate_columns) {
+  formula <- as.formula(paste("Surv(Latency, ALS) ~", covariate_column, "+ Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep+healthy.score"))
+  
+  model <- coxph(formula, data = subset_data)
+  
+  print(paste("Model2 for", covariate_column))
+  print(summary(model))
+  
+  exp_coef <- exp(coef(model))
+  conf_int <- exp(confint(model))
+  
+  exp_lower <- sprintf("%.2f", conf_int[, 1])
+  exp_upper <- sprintf("%.2f", conf_int[, 2])
+  
+  output <- paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+  
+  print(paste("Model for", covariate_column))
+  print("Exponentiated Coefficient (exp(coef)): ")
+  print(output)
+}
+
+#person cases
+exposure$ALS_personyear <- exposure$Latency/365
+cat_variables <- c("IBtwo", "IBhospitaltwo", "CNStwo",
+                   "gasttwo","respirtwo",
+                   "skintwo","ureatwo","viraltwo","bacterialtwo")
+for (cat_variable in cat_variables) {
+  print(paste( "Category Variable:", cat_variable))
+  
+  count_condition <- sum(
+    subset_data [[cat_variable]] == 1 & subset_data $ALS == 1,
+    na.rm = TRUE
+  )
+  print(paste("Count:", count_condition))
+  
+  ALS_personyear_sum <- sum(
+    subset_data $ALS_personyear[subset_data [[cat_variable]] == 1],
+    na.rm = TRUE
+  )
+  print(paste("ALS Personyear Sum:", ALS_personyear_sum))
+  print(paste("incident rate:", count_condition/ALS_personyear_sum*1000000))
+  
+}
