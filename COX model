@@ -7,6 +7,7 @@ covariate_columns <- c("IBnum","IBtwo","IBhospitalnum", "IBhospitaltwo", "IBthre
                        "gastnum","gasttwo","respirnum","respirtwo","skinnum","skintwo","ureanum","ureatwo")
 subset_data <- exposure
 
+
 #model 1
 for (covariate_column in covariate_columns) {
   formula <- as.formula(paste("Surv(Latency, ALS) ~", covariate_column, "+ Sex+Age"))
