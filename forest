@@ -1,0 +1,137 @@
+library(forestplot)
+
+#CNS GAST
+row_name1 <- cbind(c("Infection site",figure$`Infection site`),c("HR(95%CI)",figure$`HR     (95%CI)`))
+figure <- rbind(rep(NA,5),figure)
+
+forestplot(labeltext=row_name1,
+           figure$OR,figure$`CL-D`,figure$`CL-U`,
+           zero=1,
+           xlog=F,
+           is.summary = c(T,T,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F),
+           graph.pos = 2,
+           graphwidth = unit(60,"mm"),
+           boxsize =0.2,
+           #fn.ci_norm = fpDrawCircleCI,
+           line.margin = unit(5,"mm"),
+           lineheight = unit(6.5,"mm"),
+           colgap = unit(5,"mm"),
+           col=fpColors(box = "#606D9F",lines = "#606D9F",summary = "#606D9F"),
+           clip = c(0, 10),
+           xticks = c(0,5,10),
+           lwd.zero=1,
+           lwd.xaxis=1,
+           lty.ci = 7,  
+           lwd.ci = 2,  
+           ci.vertices.height = 0.1
+)
+
+#RESPIRTORY
+row_name1 <- cbind(c("Infection site",figure$`Infection site`),c("HR(95%CI)",figure$`HR     (95%CI)`))
+
+figure <- rbind(rep(NA,5),figure)
+
+forestplot(labeltext=row_name1,
+           figure$OR,figure$`CL-D`,figure$`CL-U`, 
+           zero=1,
+           xlog=F,
+           is.summary = c(T,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F),
+           graph.pos = 2,
+           graphwidth = unit(60,"mm"),
+           boxsize =0.2,
+           #fn.ci_norm = fpDrawCircleCI,
+           line.margin = unit(5,"mm"),
+           lineheight = unit(6.5,"mm"),
+           colgap = unit(5,"mm"),
+           col=fpColors(box = "#606D9F",lines = "#606D9F",summary = "#606D9F"),
+           clip = c(0, 10),
+           xticks = c(0,5,10),
+           lwd.zero=1,
+           lwd.xaxis=1,
+           lty.ci = 7,   
+           lwd.ci = 2,  
+           ci.vertices.height = 0.1
+)
+
+#skin
+row_name1 <- cbind(c("Infection site",figure$`Infection site`),c("HR(95%CI)",figure$`HR     (95%CI)`))
+
+figure <- rbind(rep(NA,5),figure)
+
+forestplot(labeltext=row_name1,
+           figure$OR,figure$`CL-D`,figure$`CL-U`, 
+           zero=1,
+           xlog=F,
+           is.summary = c(T,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F),
+           graph.pos = 2,
+           graphwidth = unit(60,"mm"),
+           boxsize =0.2,#误差条中的方块大小
+           #fn.ci_norm = fpDrawCircleCI,
+           line.margin = unit(5,"mm"),
+           lineheight = unit(6.5,"mm"),
+           colgap = unit(5,"mm"),
+           col=fpColors(box = "#606D9F",lines = "#606D9F",summary = "#606D9F"),
+           clip = c(0, 10),
+           xticks = c(0,5,10),
+           lwd.zero=1,
+           lwd.xaxis=1,
+           lty.ci = 7,   
+           lwd.ci = 2,   
+           ci.vertices.height = 0.1
+)
+
+#viral
+row_name1 <- cbind(c("Infection type",figure$`Infection type`),c("HR(95%CI)",figure$`HR     (95%CI)`))
+
+figure <- rbind(rep(NA,5),figure)
+
+forestplot(labeltext=row_name1, 
+           figure$OR,figure$`CL-D`,figure$`CL-U`, 
+           zero=1,
+           xlog=F,
+           is.summary = c(T,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F),
+           graph.pos = 2,
+           graphwidth = unit(60,"mm"),
+           boxsize =0.3,
+           #fn.ci_norm = fpDrawCircleCI,
+           line.margin = unit(5,"mm"),
+           lineheight = unit(6.5,"mm"),
+           colgap = unit(5,"mm"),
+           col=fpColors(box = "#606D9F",lines = "black",summary = "black"),
+           clip = c(0, 10),
+           xticks = c(0,5,10),
+           lwd.zero=1,
+           lwd.xaxis=1,
+           lty.ci = 7,  
+           lwd.ci = 1,   
+           ci.vertices.height = 0.1
+)
+
+#bacterial
+
+row_name1 <- cbind(c("Infection type",figure$`Infection type`),c("HR(95%CI)",figure$`HR     (95%CI)`))
+
+
+figure <- rbind(rep(NA,5),figure)
+
+forestplot(labeltext=row_name1,
+           figure$OR,figure$`CL-D`,figure$`CL-U`, 
+           zero=1,
+           xlog=F,
+           is.summary = c(T,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F),
+           graph.pos = 2,
+           graphwidth = unit(60,"mm"),
+           boxsize =0.3,
+           #fn.ci_norm = fpDrawCircleCI,
+           line.margin = unit(5,"mm"),
+           lineheight = unit(6.5,"mm"),
+           colgap = unit(5,"mm"),
+           col=fpColors(box = "#606D9F",lines = "black",summary = "black"),
+           clip = c(0, 10),
+           xticks = c(0,5,10),
+           lwd.zero=1,
+           lwd.xaxis=1,
+           lty.ci = 7,   
+           lwd.ci = 1,   
+           ci.vertices.height = 0.1
+)
