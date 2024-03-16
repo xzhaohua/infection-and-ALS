@@ -1,0 +1,100 @@
+#stratified BMI in figure 2 and etable 5
+#BMI<25
+covariate_columns <- c("IBtwo","IBnum","IBhospitaltwo","IBhospitalnum", "CNStwo","CNSnum","gasttwo",
+                       "gastnum","respirtwo","respirnum","skintwo","skinnum","ureatwo","ureanum","viraltwo",
+                       "viralnum", "bacterialtwo", "bacterialnum")
+subset_data <- exposure[exposure$BMI<25, ]
+
+for (covariate_column in covariate_columns) {
+  formula <- as.formula(paste("Surv(Latency, ALS) ~", covariate_column, "+ Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep"))
+  
+  model <- coxph(formula, data = subset_data)
+  
+  print(paste("Model2 for", covariate_column))
+  print(summary(model))
+  
+  exp_coef <- exp(coef(model))
+  conf_int <- exp(confint(model))
+  
+  exp_lower <- sprintf("%.2f", conf_int[, 1])
+  exp_upper <- sprintf("%.2f", conf_int[, 2])
+  
+  output <- paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+  
+  print(paste("Model for", covariate_column))
+  print("Exponentiated Coefficient (exp(coef)): ")
+  print(output)
+}
+
+#person cases
+subset_data$ALS_personyear <- subset_data$Latency/365
+cat_variables <- c("IBtwo", "IBhospitaltwo", "CNStwo",
+                   "gasttwo","respirtwo",
+                   "skintwo","ureatwo","viraltwo","bacterialtwo")
+for (cat_variable in cat_variables) {
+  print(paste( "Category Variable:", cat_variable))
+  
+  count_condition <- sum(
+    subset_data [[cat_variable]] == 1 & subset_data $ALS == 1,
+    na.rm = TRUE
+  )
+  print(paste("Count:", count_condition))
+  
+  ALS_personyear_sum <- sum(
+    subset_data $ALS_personyear[subset_data [[cat_variable]] == 1],
+    na.rm = TRUE
+  )
+  print(paste("ALS Personyear Sum:", ALS_personyear_sum))
+  print(paste("incident rate:", count_condition/ALS_personyear_sum*1000000))
+  
+}
+
+#bmi>=25
+covariate_columns <- c("IBtwo","IBnum","IBhospitaltwo","IBhospitalnum", "CNStwo","CNSnum","gasttwo",
+                       "gastnum","respirtwo","respirnum","skintwo","skinnum","ureatwo","ureanum","viraltwo",
+                       "viralnum", "bacterialtwo", "bacterialnum")
+subset_data <- exposure[exposure$BMI>=25, ]
+
+for (covariate_column in covariate_columns) {
+  formula <- as.formula(paste("Surv(Latency, ALS) ~", covariate_column, "+ Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep"))
+  
+  model <- coxph(formula, data = subset_data)
+  
+  print(paste("Model2 for", covariate_column))
+  print(summary(model))
+  
+  exp_coef <- exp(coef(model))
+  conf_int <- exp(confint(model))
+  
+  exp_lower <- sprintf("%.2f", conf_int[, 1])
+  exp_upper <- sprintf("%.2f", conf_int[, 2])
+  
+  output <- paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+  
+  print(paste("Model for", covariate_column))
+  print("Exponentiated Coefficient (exp(coef)): ")
+  print(output)
+}
+
+#person cases
+subset_data$ALS_personyear <- subset_data$Latency/365
+cat_variables <- c("IBtwo", "IBhospitaltwo", "CNStwo",
+                   "gasttwo","respirtwo",
+                   "skintwo","ureatwo","viraltwo","bacterialtwo")
+for (cat_variable in cat_variables) {
+  print(paste( "Category Variable:", cat_variable))
+  
+  count_condition <- sum(
+    subset_data [[cat_variable]] == 1 & subset_data $ALS == 1,
+    na.rm = TRUE
+  )
+  print(paste("Count:", count_condition))
+  
+  ALS_personyear_sum <- sum(
+    subset_data $ALS_personyear[subset_data [[cat_variable]] == 1],
+    na.rm = TRUE
+  )
+  print(paste("ALS Personyear Sum:", ALS_personyear_sum))
+  print(paste("incident rate:", count_condition/ALS_personyear_sum*1000000))
+  
+}
