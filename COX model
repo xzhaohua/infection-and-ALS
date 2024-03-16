@@ -2,7 +2,6 @@ library(dplyr)
 library(ggplot2)
 library(survival)
 library(survminer)
-
 covariate_columns <- c("IBnum","IBtwo","IBhospitalnum", "IBhospitaltwo", "IBthree", 
                        "viralnum", "viraltwo", "bacterialnum","bacterialtwo","CNSnum","CNStwo",
                        "gastnum","gasttwo","respirnum","respirtwo","skinnum","skintwo","ureanum","ureatwo")
