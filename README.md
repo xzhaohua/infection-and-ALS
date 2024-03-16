@@ -74,3 +74,21 @@ infection$skintwo <-as.factor(infection$skintwo)
 infection$ureanum <- apply(infection[, c(89:94)], 1, function(row) sum(row %in% c(1, 2)))
 infection$ureatwo <- ifelse(infection$ureanum>0,1,0)
 infection$ureatwo <-as.factor(infection$ureatwo)
+
+library(mice)
+variables_to_factorize <- c("TDI", "BMI","Qualifications","Smoking","Alcohol","SumMet")
+variables_to_factorize <- c("Qualifications","Smoking","Alcohol","sleep")
+
+for (variable in variables_to_factorize) {
+  if (length(infection[[variable]]) > 0) {
+    infection[[variable]] <- as.factor( infection[[variable]])
+  }
+}
+
+B<-infectionMice[,c(1,125)]
+B$sleep <- as.factor(B$sleep)
+data_subset <- B
+imputed_data <- mice(data_subset,method = c("pmm","polyreg"), m = 2, maxit = 50,seed = 123)
+completed_data_1 <- complete(imputed_data, 1)
+infectionMice <- infection[,-c(118:125)]
+infectionMice <- merge(infectionMice,completed_data_1, by = "Participant.ID")
