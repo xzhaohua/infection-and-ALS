@@ -7,7 +7,6 @@ subset_data <- exposure[exposure$ALS_personyear>=1, ]
 #Model
 for (covariate_column in covariate_columns) {
   formula <- as.formula(paste("Surv(Latency, ALS) ~", covariate_column, "+ Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep"))
-  
   model <- coxph(formula, data = subset_data)
   
   print(paste("Model2 for", covariate_column))
