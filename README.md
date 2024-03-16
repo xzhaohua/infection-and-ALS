@@ -7,7 +7,6 @@ infection$ethnic <- ifelse(infection$Ethnic.background...Instance.0  == "white",
                                     ifelse(infection$Ethnic.background...Instance.0 == "Any other white background", 1,
                                            ifelse(infection$Ethnic.background...Instance.0 == "Prefer not to answer", NA,
                                                   ifelse(infection$Ethnic.background...Instance.0== "NA", NA,
-                                                         
                                                          ifelse(infection$Ethnic.background...Instance.0 == "Do not know", NA, 0)))))))
                                                          
 #sleep
