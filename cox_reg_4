@@ -1,4 +1,5 @@
 #excluding current smokers
+#etable 9-11
 sum(exposure$Smoking==2, na.rm = TRUE)
 covariate_columns <- c("IBtwo","IBnum","IBhospitaltwo","IBhospitalnum", "CNStwo","CNSnum","gasttwo",
                        "gastnum","respirtwo","respirnum","skintwo","skinnum","ureatwo","ureanum","viraltwo",
