@@ -1,0 +1,126 @@
+#joint analysis in eFigure 4
+#IBtwo
+exposure$healthyIBtwo <- ifelse(exposure$healthy.diet==0&exposure$IBtwo==0,0,
+                                     ifelse(exposure$healthy.diet==0&exposure$IBtwo==1,1,
+                                            ifelse(exposure$healthy.diet==1&exposure$IBtwo==0,2,3)))
+exposure$healthyIBtwo  <- as.factor(exposure$healthyIBtwo)
+unique(exposure$healthyIBtwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyIBtwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBhospital
+exposure$healthyIBhospitaltwo <- ifelse(exposure$healthy.diet==0&exposure$IBhospitaltwo==0,0,
+                                ifelse(exposure$healthy.diet==0&exposure$IBhospitaltwo==1,1,
+                                       ifelse(exposure$healthy.diet==1&exposure$IBhospitaltwo==0,2,3)))
+exposure$healthyIBhospitaltwo  <- as.factor(exposure$healthyIBhospitaltwo)
+unique(exposure$healthyIBhospitaltwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyIBhospitaltwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBcns
+exposure$healthyCNStwo <- ifelse(exposure$healthy.diet==0&exposure$CNStwo==0,0,
+                                        ifelse(exposure$healthy.diet==0&exposure$CNStwo==1,1,
+                                               ifelse(exposure$healthy.diet==1&exposure$CNStwo==0,2,3)))
+exposure$healthyCNStwo  <- as.factor(exposure$healthyCNStwo)
+unique(exposure$healthyCNStwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyCNStwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBgast
+exposure$healthygasttwo <- ifelse(exposure$healthy.diet==0&exposure$gasttwo==0,0,
+                                 ifelse(exposure$healthy.diet==0&exposure$gasttwo==1,1,
+                                        ifelse(exposure$healthy.diet==1&exposure$gasttwo==0,2,3)))
+exposure$healthygasttwo  <- as.factor(exposure$healthygasttwo)
+unique(exposure$healthygasttwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthygasttwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBrespira
+exposure$healthyrespirtwo <- ifelse(exposure$healthy.diet==0&exposure$respirtwo==0,0,
+                                  ifelse(exposure$healthy.diet==0&exposure$respirtwo==1,1,
+                                         ifelse(exposure$healthy.diet==1&exposure$respirtwo==0,2,3)))
+exposure$healthyrespirtwo  <- as.factor(exposure$healthyrespirtwo)
+unique(exposure$healthyrespirtwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyrespirtwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBskin
+exposure$healthyskintwo <- ifelse(exposure$healthy.diet==0&exposure$skintwo==0,0,
+                                    ifelse(exposure$healthy.diet==0&exposure$skintwo==1,1,
+                                           ifelse(exposure$healthy.diet==1&exposure$skintwo==0,2,3)))
+exposure$healthyskintwo  <- as.factor(exposure$healthyskintwo)
+unique(exposure$healthyskintwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyskintwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBurea
+exposure$healthyureatwo <- ifelse(exposure$healthy.diet==0&exposure$ureatwo==0,0,
+                                  ifelse(exposure$healthy.diet==0&exposure$ureatwo==1,1,
+                                         ifelse(exposure$healthy.diet==1&exposure$ureatwo==0,2,3)))
+exposure$healthyureatwo  <- as.factor(exposure$healthyureatwo)
+unique(exposure$healthyureatwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyureatwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBviral
+exposure$healthyviraltwo <- ifelse(exposure$healthy.diet==0&exposure$viraltwo==0,0,
+                                  ifelse(exposure$healthy.diet==0&exposure$viraltwo==1,1,
+                                         ifelse(exposure$healthy.diet==1&exposure$viraltwo==0,2,3)))
+exposure$healthyviraltwo  <- as.factor(exposure$healthyviraltwo)
+unique(exposure$healthyviraltwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthyviraltwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
+
+#IBbacterial
+exposure$healthybacterialtwo <- ifelse(exposure$healthy.diet==0&exposure$bacterialtwo==0,0,
+                                   ifelse(exposure$healthy.diet==0&exposure$bacterialtwo==1,1,
+                                          ifelse(exposure$healthy.diet==1&exposure$bacterialtwo==0,2,3)))
+exposure$healthybacterialtwo  <- as.factor(exposure$healthybacterialtwo)
+unique(exposure$healthybacterialtwo)
+cox_model1 <- coxph(Surv(Latency, ALS) ~ healthybacterialtwo+Sex+Age+TDI+Qualifications+Alcohol+Smoking+BMI+SumMet+sleep,  data =exposure)
+exp_coef <- exp(coef(cox_model1))
+conf_int <- exp(confint(cox_model1))
+exp_lower <- sprintf("%.2f", conf_int[, 1])
+exp_upper <- sprintf("%.2f", conf_int[, 2])
+summary(cox_model1)
+paste(sprintf("%.2f", round(exp_coef, 2)), "(", exp_lower, "-", exp_upper, ")", sep = "")
